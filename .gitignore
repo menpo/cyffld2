@@ -1,0 +1,10 @@
+dist/*
+*.iml
+.idea/*
+*~
+*.pyc
+build/*
+cyffld2/*.so
+cyffld2/_ffld2.cpp
+
+cyffld2.egg-info/*
