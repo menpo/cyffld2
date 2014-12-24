@@ -15,12 +15,12 @@ requirements:
   run:
     - python
     - libxml2 2.9.0
-    - jpeg 3.2.2
+    - jpeg 8d
     - fftw 3.3.4
 
 test:
   imports:
-  - cypico
+  - cyffld2
 
 about:
   home: https://github.com/menpo/cypico/

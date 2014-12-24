@@ -1,7 +1,6 @@
 from setuptools import setup, find_packages, Extension
 from glob import glob
 from Cython.Build import cythonize
-import numpy as np
 
 include_directories = ['ffld2', 'ffld2/lib']
 sources = (['cyffld2/ffld2/HOGPyramid.cpp',
@@ -29,7 +28,6 @@ setup(name='cyffld2',
       author='Patrick Snape',
       author_email='p.snape@imperial.ac.uk',
       url='https://github.com/menpo/cyffld2',
-      include_dirs=[np.get_include()],
       ext_modules=cythonize(extensions, quiet=True),
       package_data={'cyffld2': [
           'ffld2/models/cascades/headhunter_dpm_baseline.txt',
