@@ -1,0 +1,3 @@
+[submodule "cyffld2/ffld2"]
+	path = cyffld2/ffld2
+	url = https://github.com/menpo/ffld2.git
