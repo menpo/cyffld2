@@ -8,3 +8,6 @@ cyffld2/*.so
 cyffld2/_ffld2.cpp
 
 cyffld2.egg-info/*
+.ipynb_checkpoints/
+wisdom.fftw
+tmp.txt

@@ -1,12 +1,12 @@
 package:
   name: cyffld2
-  version: {{ environ['CONDACI_VERSION'] }}
+  version: 0.1.0
 
 requirements:
   build:
     - python
     - setuptools
-    - cython 0.21*
+    - cython 0.21.*
     - libxml2 2.9.0
     - jpeg 8d
     - eigen 3.2.2
@@ -23,5 +23,5 @@ test:
   - cyffld2
 
 about:
-  home: https://github.com/menpo/cypico/
+  home: https://github.com/menpo/cyffld2/
   license: BSD

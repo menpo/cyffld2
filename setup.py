@@ -6,17 +6,18 @@ include_directories = ['ffld2', 'ffld2/lib']
 sources = (['cyffld2/ffld2/HOGPyramid.cpp',
             'cyffld2/ffld2/JPEGImage.cpp',
             'cyffld2/ffld2/LBFGS.cpp',
-            'cyffld2/ffld2/Mixture.cpp',
             'cyffld2/ffld2/Model.cpp',
             'cyffld2/ffld2/Object.cpp',
             'cyffld2/ffld2/Patchwork.cpp',
             'cyffld2/ffld2/Rectangle.cpp',
             'cyffld2/ffld2/Scene.cpp',
+            'cyffld2/ffld2/Mixture.cpp',
             'cyffld2/ffld2/lib/ffld2.cpp',
             'cyffld2/_ffld2.pyx'])
 extensions = [Extension('cyffld2._ffld2', sources,
                         include_dirs=include_directories,
-                        extra_compile_args=['-w'],
+                        extra_compile_args=['-w', '-fopenmp'],
+                        extra_link_args=['-fopenmp'],
                         libraries=['xml2', 'fftw3f', 'jpeg'],
                         language='c++')]
 
