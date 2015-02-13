@@ -31,7 +31,7 @@ setup(name='cyffld2',
       url='https://github.com/menpo/cyffld2',
       ext_modules=cythonize(extensions, quiet=True),
       package_data={'cyffld2': [
-          'ffld2/models/cascades/headhunter_dpm_baseline.txt',
+          'ffld2/models/headhunter_dpm_baseline.txt',
           'ffld2/*.h',
           'ffld2/lib/*.h',
           'ffld2/*.cpp',
