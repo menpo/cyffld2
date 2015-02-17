@@ -7,14 +7,15 @@ requirements:
     - python
     - setuptools
     - cython 0.21.*
-    - libxml2 2.9.0
+    - libxml2 >2.7
     - jpeg 8d
     - eigen 3.2.2
     - fftw 3.3.4
+    - msinttypes r26  # [win]
 
   run:
     - python
-    - libxml2 2.9.0
+    - libxml2 >2.7
     - jpeg 8d
     - fftw 3.3.4
 
