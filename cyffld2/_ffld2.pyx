@@ -278,7 +278,7 @@ cpdef cy_train(list positive_image_arrays, list positive_bbox_arrays,
                const int pad_x, const int pad_y, const int interval,
                const int n_relabel, const int n_datamine,
                const int max_negatives, const double C, const double J,
-               const double overlap, model_out_path=None):
+               const double overlap):
     r"""
     Trains an ffld2 model using a set of in-memory images. Must explicitly pass
     a list of positive images and a list of negative images. The negative images
@@ -321,8 +321,6 @@ cpdef cy_train(list positive_image_arrays, list positive_bbox_arrays,
         SVM positive regularization constant boost.
     overlap : double
         Minimum overlap in in latent positive search and non-maxima suppression.
-    model_out_path : string, optional
-        If provided, the model will be saved out to the given path.
 
     Returns
     -------
@@ -349,10 +347,7 @@ cpdef cy_train(list positive_image_arrays, list positive_bbox_arrays,
                  pad_x, pad_y, interval, n_relabel, n_datamine, max_negatives,
                  C, J, overlap, mixture):
         raise ValueError('Failed to train model.')
-
-    if model_out_path is not None:
-        save_mixture_model(model_out_path, mixture)
-
     mixture_wrapper = FFLDMixture()
     mixture_wrapper.mixture = mixture
+
     return mixture_wrapper

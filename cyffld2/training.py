@@ -4,7 +4,7 @@ from ._ffld2 import cy_train
 def train_model(positive_image_arrays, positive_bbox_arrays,
                 negative_image_arrays, n_components=3, pad_x=6, pad_y=6,
                 interval=5, n_relabel=8, n_datamine=10, max_negatives=24000,
-                C=0.002, J=2.0, overlap=0.5, model_out_path=None):
+                C=0.002, J=2.0, overlap=0.5):
     r"""
     Trains an ffld2 model using a set of in-memory images. Must explicitly pass
     a list of positive images and a list of negative images. The negative images
@@ -50,8 +50,6 @@ def train_model(positive_image_arrays, positive_bbox_arrays,
         SVM positive regularization constant boost.
     overlap : `double`
         Minimum overlap in in latent positive search and non-maxima suppression.
-    model_out_path : `str`, optional
-        If provided, the model will be saved out to the given path.
 
     Returns
     -------
@@ -65,5 +63,4 @@ def train_model(positive_image_arrays, positive_bbox_arrays,
     """
     return cy_train(positive_image_arrays, positive_bbox_arrays,
                     negative_image_arrays, n_components, pad_x, pad_y, interval,
-                    n_relabel, n_datamine, max_negatives, C, J, overlap,
-                    model_out_path)
+                    n_relabel, n_datamine, max_negatives, C, J, overlap)
