@@ -20,8 +20,11 @@ requirements:
     - fftw 3.3.4
 
 test:
+  requires:
+    - scipy  # For getting the lena image
+
   imports:
-  - cyffld2
+    - cyffld2
 
 about:
   home: https://github.com/menpo/cyffld2/
