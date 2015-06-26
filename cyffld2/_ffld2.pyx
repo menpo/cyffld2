@@ -243,7 +243,7 @@ cdef image_arrays_to_scenes(list image_arrays, list bbox_arrays,
     ----------
     image_arrays : list of unsigned char[:, :, :]
         The list of uint8 images which are for training.
-    bbox_arrays : list of 1D ndarrays with 4 elements
+    bbox_arrays : list of lists of 1D int ndarrays with 4 elements
         The elements should be [x, y, width, height] where the meaning of those
         elements is as described in FFLDDetection.
     scenes : vector[InMemoryScene]
@@ -295,9 +295,10 @@ cpdef cy_train(list positive_image_arrays, list positive_bbox_arrays,
     ----------
     positive_image_arrays : list of unsigned char[:, :, :]
         The list of uint8 images which are for positive training.
-    positive_bbox_arrays : list of 1D ndarrays with 4 elements
+    positive_bbox_arrays : list of lists of 1D int ndarrays with 4 elements
         The elements should be [x, y, width, height] where the meaning of those
-        elements is as described in FFLDDetection.
+        elements is as described in FFLDDetection. A list of lists is passed
+        as there may be more than one object per image.
     negative_image_arrays: list of unsigned char[:, :, :]
         The list of uint8 images which are for negative training.
     n_components : int
