@@ -3,6 +3,7 @@ from libcpp.vector cimport vector
 from ._ffld2 cimport (InMemoryScene, Detection, Mixture, Object, Rectangle,
                       load_mixture_model, save_mixture_model, detect, train)
 
+
 cpdef load_model(string path):
     r"""
     Loads a mixture model from the provided path and returns an FFLDMixture.
@@ -46,7 +47,7 @@ cdef class FFLDMixture:
             The full path to save the model to. Saved in the standard
             text format assumed by ffld2.
         """
-        save_mixture_model(output_filename, self.mixture)
+        save_mixture_model(output_filename.encode('UTF-8'), self.mixture)
 
     cpdef load(self, input_filename):
         r"""
@@ -62,7 +63,7 @@ cdef class FFLDMixture:
         ValueError
             Loading fails.
         """
-        if not load_mixture_model(input_filename, self.mixture):
+        if not load_mixture_model(input_filename.encode('UTF-8'), self.mixture):
             raise ValueError('Unable to load mixture model from the given '
                              'path: {}'.format(input_filename))
 
