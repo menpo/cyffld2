@@ -59,10 +59,10 @@ extensions = [Extension('cyffld2._ffld2', sources,
                         libraries=libraries,
                         language='c++')]
 
-requirements = ['Cython>=0.21,<=0.22']
+requirements = ['Cython>=0.22,<=0.23']
 
 setup(name='cyffld2',
-      version='0.1.0',
+      version='0.1.1',
       description='A Cython wrapper around the FFLD2 face detection library.',
       author='Patrick Snape',
       author_email='p.snape@imperial.ac.uk',

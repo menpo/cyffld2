@@ -1,12 +1,12 @@
 package:
   name: cyffld2
-  version: 0.1.0
+  version: 0.1.1
 
 requirements:
   build:
     - python
     - setuptools
-    - cython 0.21.*
+    - cython 0.22.*
     - libxml2 >2.7
     - jpeg 8d
     - eigen 3.2.2
