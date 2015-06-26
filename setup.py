@@ -49,7 +49,7 @@ elif 'windows' in _platform:
         library_dirs.append(os.environ['LIBRARY_LIB'])
         # This looks a bit strange but it is to match the library names
         # that I have created in other recipes.
-        libraries += ['libxml2', 'libfftw3f', 'jpeg']
+        libraries += ['libxml2', 'libfftw3f-3', 'jpeg']
             
 extensions = [Extension('cyffld2._ffld2', sources,
                         include_dirs=include_dirs,
