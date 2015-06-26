@@ -14,19 +14,26 @@ def train_model(positive_image_arrays, positive_bbox_arrays,
     list of uint8 arrays with an explicit channel axis. Can be RGB or Greyscale,
     but Greyscale images must have an empty channel axis.
 
-    ``positive_bbox_arrays`` should be a list of arrays with 4 elements:
+    ``positive_bbox_arrays`` should be a list of lists of arrays with
+    4 elements:
 
         [x, y, width, height]
 
-    as described in FFLDDetection.
+    which should be type `int`, as described in FFLDDetection.
+
+    NOTE: Once you run this function, you will not be able to kill the Python
+    process via Ctrl+C or any other interrupt until training is complete.
+    Also note that training may take a number of hours and possible approach
+    days if there are a lot of images.
 
     Parameters
     ----------
     positive_image_arrays : list of ``(height, width, n_channels)`` `uint8 ndarray`
         The list of uint8 images which are for positive training.
-    positive_bbox_arrays : list of 1D ndarrays with 4 elements
+    positive_bbox_arrays : list of lists of 1D int ndarrays with 4 elements
         The elements should be [x, y, width, height] where the meaning of those
-        elements is as described in FFLDDetection.
+        elements is as described in FFLDDetection. A list of lists is passed
+        as there may be more than one object per image.
     negative_image_arrays: list of ``(height, width, n_channels)`` `uint8 ndarray`
         The list of uint8 images which are for negative training.
     n_components : `int`
