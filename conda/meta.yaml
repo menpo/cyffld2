@@ -1,6 +1,6 @@
 package:
   name: cyffld2
-  version: 0.1.1
+  version: {{ CONDACI_VERSION }}
 
 requirements:
   build:
