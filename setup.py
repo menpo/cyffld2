@@ -3,6 +3,7 @@ from glob import glob
 from Cython.Build import cythonize
 import platform
 import os
+import versioneer
 
 
 include_dirs = ['ffld2', 'ffld2/lib']
@@ -28,6 +29,8 @@ if 'linux' in _platform:
     extra_compile_args += ['-fopenmp']
     extra_link_args += ['-fopenmp']
 
+    libraries += ['xml2', 'fftw3f', 'jpeg']
+elif 'darwin' in _platform:
     libraries += ['xml2', 'fftw3f', 'jpeg']
 elif 'windows' in _platform:
     extra_compile_args += ['/openmp']
@@ -62,7 +65,8 @@ extensions = [Extension('cyffld2._ffld2', sources,
 requirements = ['Cython>=0.22,<=0.23']
 
 setup(name='cyffld2',
-      version='0.1.1',
+      version=versioneer.get_version(),
+      cmdclass=versioneer.get_cmdclass(),
       description='A Cython wrapper around the FFLD2 face detection library.',
       author='Patrick Snape',
       author_email='p.snape@imperial.ac.uk',

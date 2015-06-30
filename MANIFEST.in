@@ -1,0 +1,2 @@
+include versioneer.py
+include cyffld2/_version.py
