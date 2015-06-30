@@ -7,7 +7,11 @@ environment:
       secure: mw1Fz5a5C0lT4CXzsOCADoo/Xa9YymZI3yjVZNR8f5GwYrVAOC2YXxyEG6NaSWZY
   matrix:
     - PYTHON_VERSION: 2.7
-    - PYTHON_VERSION: 3.4
+    # Unfortuantely, cyffld2 requires OpenMP to build correctly,
+    # and appyveyor only has Visual Studio 2010 Express installed.
+    # Express doesn't support OpenMP builds, only VS2010 Pro does,
+    # therefore, we have to do the VS2010 builds manually.
+    # - PYTHON_VERSION: 3.4
 
 matrix:
   fast_finish: true
