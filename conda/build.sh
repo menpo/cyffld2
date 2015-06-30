@@ -10,6 +10,6 @@ if [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 fi
 
 INCLUDE_PATH=$PREFIX/include
-export CFLAGS="-I$INCLUDE_PATH -I$INCLUDE_PATH/libxml2"
+export CFLAGS="-I$INCLUDE_PATH/eigen3 -I$INCLUDE_PATH -I$INCLUDE_PATH/libxml2"
 
 "$PYTHON" setup.py install --single-version-externally-managed --record=/tmp/record.txt
