@@ -62,7 +62,7 @@ extensions = [Extension('cyffld2._ffld2', sources,
                         libraries=libraries,
                         language='c++')]
 
-requirements = ['Cython>=0.22,<=0.23']
+requirements = ['Cython>=0.23,<=0.24']
 
 setup(name='cyffld2',
       version=versioneer.get_version(),

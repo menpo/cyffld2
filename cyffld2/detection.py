@@ -37,7 +37,7 @@ def get_frontal_face_mixture_model():
 
 
 def detect_frontal_faces(image, padding=6, interval=5, threshold=4.0,
-                         overlap=0.3):
+                         cache_wisdom=False, overlap=0.3):
     r"""
     Detect frontal faces in the given image. The image can be either
     RGB or Greyscale, but must be uint8 (unsigned char) and have a channel axis,
@@ -48,14 +48,16 @@ def detect_frontal_faces(image, padding=6, interval=5, threshold=4.0,
     image : ``(height, width, n_channels)`` `uint8 ndarray`
         An unsigned 8-bit image with pixels [0, 255] with an explicit channel
         axis as the last axis.
-    padding : `int`
+    padding : `int`, optional
         Amount of zero padding in HOG cells
-    interval : `int`
+    interval : `int`, optional
         Number of levels per octave in the HOG pyramid
-    threshold : `double`
+    threshold : `double`, optional
         Minimum detection threshold. Detections with a score less than this
         value are not returned. Values can be negative.
-    overlap : `double`
+    cache_wisdom : `bool`, optional
+        Whether or not to cache an FFTW wisdom file.
+    overlap : `double`, optional
         Minimum overlap in in latent positive search and non-maxima suppression.
         As discussed in [1]_, a sensible value for overlap is 0.3
 
@@ -77,11 +79,12 @@ def detect_frontal_faces(image, padding=6, interval=5, threshold=4.0,
     """
     return detect_objects(get_frontal_face_mixture_model(), image,
                           padding=padding, interval=interval,
-                          threshold=threshold, overlap=overlap)
+                          threshold=threshold, cache_wisdom=cache_wisdom,
+                          overlap=overlap)
 
 
 def detect_objects(model, image, padding=6, interval=5, threshold=0.5,
-                   overlap=0.3):
+                   cache_wisdom=False, overlap=0.3):
     r"""
     Detect objects using the provided model in the image. The image can be
     either RGB or Greyscale, but must be uint8 (unsigned char) and have a
@@ -94,14 +97,16 @@ def detect_objects(model, image, padding=6, interval=5, threshold=0.5,
     image : ``(height, width, n_channels)`` `uint8 ndarray`
         An unsigned 8-bit image with pixels [0, 255] with an explicit channel
         axis as the last axis.
-    padding : `int`
+    padding : `int`, optional
         Amount of zero padding in HOG cells
-    interval : `int`
+    interval : `int`, optional
         Number of levels per octave in the HOG pyramid
-    threshold : `double`
+    threshold : `double`, optional
         Minimum detection threshold. Detections with a score less than this
         value are not returned. Values can be negative.
-    overlap : `double`
+    cache_wisdom : `bool`, optional
+        Whether or not to cache an FFTW wisdom file.
+    overlap : `double`, optional
         Minimum overlap in in latent positive search and non-maxima suppression.
         As discussed in [1]_, a sensible value for overlap is 0.3
 
@@ -118,4 +123,4 @@ def detect_objects(model, image, padding=6, interval=5, threshold=0.5,
     if model.is_empty():
         raise ValueError('Mixture model must not be empty.')
     return cy_detect_objects(model, image, padding, interval, threshold,
-                             overlap)
+                             cache_wisdom, overlap)

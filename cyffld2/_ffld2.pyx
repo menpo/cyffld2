@@ -1,5 +1,6 @@
 # distutils: language = c++
 from libcpp.vector cimport vector
+from libcpp cimport bool
 from ._ffld2 cimport (InMemoryScene, Detection, Mixture, Object, Rectangle,
                       load_mixture_model, save_mixture_model, detect, train)
 
@@ -188,7 +189,7 @@ cdef class FFLDDetection:
 
 cpdef cy_detect_objects(FFLDMixture mixture_model, unsigned char[:, :, :] image,
                         int padding, int interval, double threshold,
-                        double overlap):
+                        bool cache_wisdom, double overlap):
     r"""
     Detect all objects described by the given model in the given image. RGB
     and Greyscale images are both supported, but Greyscale images must have
@@ -208,6 +209,8 @@ cpdef cy_detect_objects(FFLDMixture mixture_model, unsigned char[:, :, :] image,
     threshold : double
         Minimum detection threshold. Detections with a score less than this
         value are not returned. Values can be negative.
+    cache_wisdom : bool
+        Whether or not to write a wisdom file for FFTW.
     overlap : double
         Minimum overlap in in latent positive search and non-maxima suppression.
 
@@ -220,7 +223,7 @@ cpdef cy_detect_objects(FFLDMixture mixture_model, unsigned char[:, :, :] image,
         vector[Detection] detections
     detect(mixture_model.mixture, &image[0, 0, 0], image.shape[1],
            image.shape[0], image.shape[2], padding, interval, threshold,
-           overlap, detections)
+           cache_wisdom, overlap, detections)
 
     output_detections = []
     for d in detections:
@@ -276,8 +279,8 @@ cdef image_arrays_to_scenes(list image_arrays, list bbox_arrays,
 
 cpdef cy_train(list positive_image_arrays, list positive_bbox_arrays,
                list negative_image_arrays, const int n_components,
-               const int pad_x, const int pad_y, const int interval,
-               const int n_relabel, const int n_datamine,
+               const int pad_x, const int pad_y, const bool cache_wisdom,
+               const int interval, const int n_relabel, const int n_datamine,
                const int max_negatives, const double C, const double J,
                const double overlap):
     r"""
@@ -308,6 +311,8 @@ cpdef cy_train(list positive_image_arrays, list positive_bbox_arrays,
         Amount of zero padding in HOG cells (x-direction).
     pad_y : int
         Amount of zero padding in HOG cells (y-direction).
+    cache_wisdom : bool
+        Whether or not to cache an FFTW wisdom file.
     interval : int
         Number of levels per octave in the HOG pyramid.
     n_relabel : int
@@ -346,10 +351,12 @@ cpdef cy_train(list positive_image_arrays, list positive_bbox_arrays,
     cdef Mixture mixture = Mixture(n_components, positive_scenes)
 
     if not train(positive_scenes, negative_scenes,
-                 pad_x, pad_y, interval, n_relabel, n_datamine, max_negatives,
+                 pad_x, pad_y, cache_wisdom, interval, 
+                 n_relabel, n_datamine, max_negatives,
                  C, J, overlap, mixture):
         raise ValueError('Failed to train model.')
     mixture_wrapper = FFLDMixture()
     mixture_wrapper.mixture = mixture
 
     return mixture_wrapper
+

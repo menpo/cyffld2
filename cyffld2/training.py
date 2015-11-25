@@ -3,8 +3,8 @@ from ._ffld2 import cy_train
 
 def train_model(positive_image_arrays, positive_bbox_arrays,
                 negative_image_arrays, n_components=3, pad_x=6, pad_y=6,
-                interval=5, n_relabel=8, n_datamine=10, max_negatives=24000,
-                C=0.002, J=2.0, overlap=0.5):
+                cache_wisdom=False, interval=5, n_relabel=8, n_datamine=10, 
+                max_negatives=24000, C=0.002, J=2.0, overlap=0.5):
     r"""
     Trains an ffld2 model using a set of in-memory images. Must explicitly pass
     a list of positive images and a list of negative images. The negative images
@@ -36,26 +36,28 @@ def train_model(positive_image_arrays, positive_bbox_arrays,
         as there may be more than one object per image.
     negative_image_arrays: list of ``(height, width, n_channels)`` `uint8 ndarray`
         The list of uint8 images which are for negative training.
-    n_components : `int`
+    n_components : `int`, optional
         Number of mixture components (without symmetry).
-    pad_x : `int`
+    pad_x : `int`, optional
         Amount of zero padding in HOG cells (x-direction).
-    pad_y : `int`
+    pad_y : `int`, optional
         Amount of zero padding in HOG cells (y-direction).
-    interval : `int`
+    cache_wisdom : `bool`, optional
+        Whether or not to cache an FFTW wisdom file or not.
+    interval : `int`, optional
         Number of levels per octave in the HOG pyramid.
-    n_relabel : `int`
+    n_relabel : `int`, optional
         Maximum number of training iterations.
-    n_datamine : `int`
+    n_datamine : `int`, optional
         Maximum number of data-mining iterations within each training iteration.
-    max_negatives : `int`
+    max_negatives : `int`, optional
         Maximum number of negative images to consider, can be useful for
         reducing training time.
-    C : `double`
+    C : `double`, optional
         SVM regularization constant.
-    J : `double`
+    J : `double`, optional
         SVM positive regularization constant boost.
-    overlap : `double`
+    overlap : `double`, optional
         Minimum overlap in in latent positive search and non-maxima suppression.
 
     Returns
@@ -69,5 +71,6 @@ def train_model(positive_image_arrays, positive_bbox_arrays,
         If the model fails to train in any way.
     """
     return cy_train(positive_image_arrays, positive_bbox_arrays,
-                    negative_image_arrays, n_components, pad_x, pad_y, interval,
-                    n_relabel, n_datamine, max_negatives, C, J, overlap)
+                    negative_image_arrays, n_components, pad_x, pad_y,
+                    cache_wisdom, interval, n_relabel, n_datamine,
+                    max_negatives, C, J, overlap)
