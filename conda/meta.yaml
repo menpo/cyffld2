@@ -6,7 +6,7 @@ requirements:
   build:
     - python
     - setuptools
-    - cython 0.22.*
+    - cython 0.23.*
     - libxml2 >2.7
     - jpeg 8d
     - eigen 3.2.2

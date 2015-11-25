@@ -57,7 +57,8 @@ cdef extern from "ffld2/Object.h" namespace "FFLD::Object":
 cdef extern from "ffld2/Object.h" namespace "FFLD":
     cppclass Object:
         Object()
-        Object(Name name, Pose pose, bool truncated, bool difficult, Rectangle bndbox)
+        Object(Name name, Pose pose, bool truncated, bool difficult,
+               Rectangle bndbox)
         Object(Rectangle bndbox)
         bool empty()
         Name name()
@@ -94,7 +95,7 @@ cdef extern from "ffld2/Scene.h" namespace "FFLD":
 cdef extern from "ffld2/Mixture.h" namespace "FFLD":
     cppclass Mixture:
         Mixture()
-        Mixture(int nbComponents, vector[InMemoryScene]& positive_scenes)
+        Mixture(int n_components, vector[InMemoryScene]& positive_scenes)
         bool empty()
         pair[int, int] minSize()
         pair[int, int] maxSize()
@@ -108,21 +109,22 @@ cdef extern from "ffld2/lib/ffld2.h":
     void detect(const Mixture mixture, const unsigned char* image,
                 const int width, const int height, const int n_channels,
                 const int padding, const int interval, const double threshold,
-                const double overlap, vector[Detection]& detections)
+                const bool cache_wisdom, const double overlap,
+                vector[Detection]& detections)
     bool load_mixture_model(const string filepath, Mixture& mixture)
     bool save_mixture_model(const string filepath, const Mixture& mixture)
     bool train(const vector[InMemoryScene] positive_scenes,
                const vector[InMemoryScene] negative_scenes,
-               const int nbComponents,
-               const int padx, const int pady,
-               const int interval, const int nbRelabel,
-               const int nbDatamine, const int maxNegatives,
+               const int n_components,
+               const int pad_x, const int pad_y, const bool cache_wisdom,
+               const int interval, const int n_relabel,
+               const int n_data_mine, const int max_negatives,
                const double C, const double J,
                const double overlap, const string model_out_path)
     bool train(const vector[InMemoryScene] positive_scenes,
                const vector[InMemoryScene] negative_scenes,
-               const int padx, const int pady,
-               const int interval, const int nbRelabel,
-               const int nbDatamine, const int maxNegatives,
+               const int pad_x, const int pad_y, const bool cache_wisdom,
+               const int interval, const int n_relabel,
+               const int n_data_mine, const int max_negatives,
                const double C, const double J,
                const double overlap, Mixture& mixture)
