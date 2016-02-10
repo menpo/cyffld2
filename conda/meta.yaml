@@ -21,7 +21,8 @@ requirements:
 
 test:
   requires:
-    - scipy  # For getting the lena image
+    - numpy
+    - pillow
 
   imports:
     - cyffld2
@@ -29,3 +30,4 @@ test:
 about:
   home: https://github.com/menpo/cyffld2/
   license: BSD
+
