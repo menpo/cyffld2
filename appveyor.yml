@@ -12,6 +12,7 @@ environment:
     # Express doesn't support OpenMP builds, only VS2010 Pro does,
     # therefore, we have to do the VS2010 builds manually.
     # - PYTHON_VERSION: 3.4
+    - PYTHON_VERSION: 3.5
 
 matrix:
   fast_finish: true
