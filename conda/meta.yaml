@@ -6,18 +6,20 @@ requirements:
   build:
     - python
     - setuptools
-    - cython 0.23.*
-    - libxml2 >2.7
-    - jpeg 8d
-    - eigen 3.2.2
-    - fftw 3.3.4
+    - cython >=0.23
+    - numpy >=1.10
+    - libxml2 2.*
+    - jpeg
+    - eigen 3.*
+    - fftw 3.*
     - msinttypes r26  # [win]
 
   run:
     - python
-    - libxml2 >2.7
-    - jpeg 8d
-    - fftw 3.3.4
+    - numpy >=1.10
+    - libxml2 2.*
+    - jpeg
+    - fftw 3.*
 
 test:
   requires:
