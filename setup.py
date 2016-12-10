@@ -62,8 +62,6 @@ extensions = [Extension('cyffld2._ffld2', sources,
                         libraries=libraries,
                         language='c++')]
 
-requirements = ['Cython>=0.23,<=0.24']
-
 setup(name='cyffld2',
       version=versioneer.get_version(),
       cmdclass=versioneer.get_cmdclass(),
@@ -81,6 +79,5 @@ setup(name='cyffld2',
           '_ffld2.pyx',
           '_ffld2.pxd'
       ]},
-      install_requires=requirements,
       packages=find_packages()
 )
